@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.coverage
+*.egg-info/
+.venv/
+data/raw/
+outputs/*.joblib
+outputs/*.parquet
+.DS_Store
+publish.sh
