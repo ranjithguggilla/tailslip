@@ -1,0 +1,679 @@
+{
+  "data": {
+    "flights": 334264,
+    "cancelled": 5743,
+    "dropped_without_tail_number": 2512,
+    "delay_rate": 0.2353,
+    "split_rows": {
+      "train": 222969,
+      "validation": 56235,
+      "test": 55060
+    },
+    "split_delay_rate": {
+      "train": 0.2562,
+      "validation": 0.1564,
+      "test": 0.2312
+    },
+    "horizon_hours": 2.0
+  },
+  "boost_grid": [
+    {
+      "learning_rate": 0.06,
+      "max_leaf_nodes": 31,
+      "max_iter": 300,
+      "min_samples_leaf": 40,
+      "val_log_loss": 0.3562
+    },
+    {
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 15,
+      "max_iter": 400,
+      "min_samples_leaf": 100,
+      "val_log_loss": 0.3575
+    },
+    {
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 63,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "val_log_loss": 0.3555
+    }
+  ],
+  "selection": {
+    "best_on_validation": "boosting, full",
+    "shipped": "boosting, full",
+    "rule": "simplest candidate within one bootstrap standard error of the best validation log loss",
+    "boost_config": {
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 63,
+      "max_iter": 200,
+      "min_samples_leaf": 40
+    },
+    "paired_se": {
+      "base rate": 0.0091,
+      "slot rate": 0.0062,
+      "late-aircraft rule": 0.0095,
+      "logistic": 0.0019,
+      "boosting, no live state": 0.005,
+      "boosting, full": 0.0
+    }
+  },
+  "models": {
+    "base rate": {
+      "validation": {
+        "auc": 0.5,
+        "log_loss": 0.4627,
+        "brier": 0.1419,
+        "ece": 0.0999,
+        "mean_pred": 0.2562,
+        "base_rate": 0.1564
+      },
+      "test": {
+        "auc": 0.5,
+        "log_loss": 0.5424,
+        "brier": 0.1784,
+        "ece": 0.0782,
+        "mean_pred": 0.2562,
+        "base_rate": 0.2312
+      },
+      "test_auc_ci": [
+        0.5,
+        0.5
+      ]
+    },
+    "slot rate": {
+      "validation": {
+        "auc": 0.6838,
+        "log_loss": 0.4353,
+        "brier": 0.1359,
+        "ece": 0.097,
+        "mean_pred": 0.2534,
+        "base_rate": 0.1564
+      },
+      "test": {
+        "auc": 0.6651,
+        "log_loss": 0.5126,
+        "brier": 0.1684,
+        "ece": 0.027,
+        "mean_pred": 0.2546,
+        "base_rate": 0.2312
+      },
+      "test_auc_ci": [
+        0.6492,
+        0.6793
+      ]
+    },
+    "late-aircraft rule": {
+      "validation": {
+        "auc": 0.5372,
+        "log_loss": 0.4563,
+        "brier": 0.1397,
+        "ece": 0.094,
+        "mean_pred": 0.2484,
+        "base_rate": 0.1564
+      },
+      "test": {
+        "auc": 0.5507,
+        "log_loss": 0.5369,
+        "brier": 0.1763,
+        "ece": 0.0579,
+        "mean_pred": 0.2537,
+        "base_rate": 0.2312
+      },
+      "test_auc_ci": [
+        0.5431,
+        0.5588
+      ]
+    },
+    "logistic": {
+      "validation": {
+        "auc": 0.7448,
+        "log_loss": 0.3733,
+        "brier": 0.1108,
+        "ece": 0.0428,
+        "mean_pred": 0.1992,
+        "base_rate": 0.1564
+      },
+      "test": {
+        "auc": 0.7438,
+        "log_loss": 0.4632,
+        "brier": 0.1478,
+        "ece": 0.0062,
+        "mean_pred": 0.2265,
+        "base_rate": 0.2312
+      },
+      "test_auc_ci": [
+        0.7211,
+        0.7647
+      ]
+    },
+    "boosting, no live state": {
+      "validation": {
+        "auc": 0.7214,
+        "log_loss": 0.3998,
+        "brier": 0.1223,
+        "ece": 0.0645,
+        "mean_pred": 0.2209,
+        "base_rate": 0.1564
+      },
+      "test": {
+        "auc": 0.6991,
+        "log_loss": 0.5002,
+        "brier": 0.1627,
+        "ece": 0.0374,
+        "mean_pred": 0.2311,
+        "base_rate": 0.2312
+      },
+      "test_auc_ci": [
+        0.6698,
+        0.7229
+      ]
+    },
+    "boosting, full": {
+      "validation": {
+        "auc": 0.7646,
+        "log_loss": 0.3555,
+        "brier": 0.1051,
+        "ece": 0.0255,
+        "mean_pred": 0.1819,
+        "base_rate": 0.1564
+      },
+      "test": {
+        "auc": 0.7518,
+        "log_loss": 0.4548,
+        "brier": 0.1444,
+        "ece": 0.0141,
+        "mean_pred": 0.2271,
+        "base_rate": 0.2312
+      },
+      "test_auc_ci": [
+        0.7272,
+        0.7693
+      ]
+    }
+  },
+  "calibration": {
+    "shipped_calibrator": "none",
+    "october_ece_raw": 0.0228,
+    "october_ece_isotonic": 0.007,
+    "test_ece_raw": 0.0141,
+    "test_ece_isotonic_on_validation": 0.0403,
+    "test_mean_pred": 0.2271,
+    "test_base_rate": 0.2312,
+    "validation_base_rate": 0.1564,
+    "validation_mean_pred": 0.1819
+  },
+  "shipped_test": {
+    "auc": 0.7518,
+    "log_loss": 0.4548,
+    "brier": 0.1444,
+    "ece": 0.0141,
+    "mean_pred": 0.2271,
+    "base_rate": 0.2312,
+    "auc_ci": [
+      0.7272,
+      0.7693
+    ],
+    "log_loss_ci": [
+      0.4266,
+      0.4839
+    ]
+  },
+  "economics": {
+    "assumptions": {
+      "value_per_caught_delay": 60.0,
+      "cost_per_false_alert": 25.0,
+      "flights_per_year": 334264
+    },
+    "threshold_from_validation": 0.36,
+    "test": {
+      "threshold": 0.36,
+      "alert_rate": 0.1743,
+      "precision": 0.5644,
+      "recall": 0.4254,
+      "net_per_flight": 4.0029
+    },
+    "net_per_flight": {
+      "alert none": 0.0,
+      "alert every flight": -5.3478,
+      "late-aircraft rule": 0.4313,
+      "slot rate": 0.9905,
+      "tailslip": 4.0029
+    },
+    "net_ci": [
+      2.6957,
+      5.3697
+    ],
+    "gain_over_slot_ci": [
+      2.0569,
+      3.9973
+    ],
+    "hindsight_threshold": 0.29,
+    "hindsight_net_per_flight": 4.1022,
+    "sensitivity": [
+      {
+        "value_per_caught_delay": 60,
+        "cost_per_false_alert": 25,
+        "break_even_probability": 0.2941,
+        "tailslip": 4.1062,
+        "slot_rate": 1.5037,
+        "alert_every_flight": -5.3478
+      },
+      {
+        "value_per_caught_delay": 120,
+        "cost_per_false_alert": 15,
+        "break_even_probability": 0.1111,
+        "tailslip": 17.1023,
+        "slot_rate": 16.7261,
+        "alert_every_flight": 16.2123
+      },
+      {
+        "value_per_caught_delay": 40,
+        "cost_per_false_alert": 40,
+        "break_even_probability": 0.5,
+        "tailslip": 1.4464,
+        "slot_rate": -0.2107,
+        "alert_every_flight": -21.5038
+      },
+      {
+        "value_per_caught_delay": 100,
+        "cost_per_false_alert": 50,
+        "break_even_probability": 0.3333,
+        "tailslip": 6.0307,
+        "slot_rate": 1.3967,
+        "alert_every_flight": -15.3197
+      }
+    ],
+    "per_1000_flights": {
+      "alert none": 0.0,
+      "alert every flight": -5347.8024,
+      "late-aircraft rule": 431.3476,
+      "slot rate": 990.4649,
+      "tailslip": 4002.9059
+    },
+    "per_year_at_nyc_volume": {
+      "alert none": 0.0,
+      "alert every flight": -1787577.8206,
+      "late-aircraft rule": 144183.9811,
+      "slot rate": 331076.7752,
+      "tailslip": 1338027.3447
+    }
+  },
+  "lead_time": [
+    {
+      "hours_before": 0.0,
+      "auc": 0.8056,
+      "log_loss": 0.4175,
+      "ece": 0.008
+    },
+    {
+      "hours_before": 1.0,
+      "auc": 0.7646,
+      "log_loss": 0.4462,
+      "ece": 0.0103
+    },
+    {
+      "hours_before": 2.0,
+      "auc": 0.7518,
+      "log_loss": 0.4548,
+      "ece": 0.0141
+    },
+    {
+      "hours_before": 4.0,
+      "auc": 0.7395,
+      "log_loss": 0.4646,
+      "ece": 0.0185
+    },
+    {
+      "hours_before": 8.0,
+      "auc": 0.7038,
+      "log_loss": 0.4981,
+      "ece": 0.0366
+    },
+    {
+      "hours_before": 24.0,
+      "auc": 0.6725,
+      "log_loss": 0.5158,
+      "ece": 0.0453
+    }
+  ],
+  "leakage_studies": {
+    "hindsight_weather_at_departure": {
+      "auc": 0.7603,
+      "log_loss": 0.4497,
+      "brier": 0.1427,
+      "ece": 0.0094,
+      "mean_pred": 0.2285,
+      "base_rate": 0.2312
+    },
+    "random_row_split_all_year": {
+      "auc": 0.7996,
+      "log_loss": 0.4209,
+      "brier": 0.132,
+      "ece": 0.0046,
+      "mean_pred": 0.2356,
+      "base_rate": 0.2353
+    }
+  },
+  "group_ablation": {
+    "aircraft's previous leg": {
+      "auc": 0.7322,
+      "log_loss": 0.4724,
+      "brier": 0.1514,
+      "ece": 0.017,
+      "mean_pred": 0.229,
+      "base_rate": 0.2312
+    },
+    "airport congestion": {
+      "auc": 0.7282,
+      "log_loss": 0.4736,
+      "brier": 0.1519,
+      "ece": 0.029,
+      "mean_pred": 0.231,
+      "base_rate": 0.2312
+    },
+    "weather at the airport": {
+      "auc": 0.7537,
+      "log_loss": 0.4537,
+      "brier": 0.1442,
+      "ece": 0.0165,
+      "mean_pred": 0.241,
+      "base_rate": 0.2312
+    },
+    "schedule slot": {
+      "auc": 0.752,
+      "log_loss": 0.4539,
+      "brier": 0.1441,
+      "ece": 0.0131,
+      "mean_pred": 0.2279,
+      "base_rate": 0.2312
+    },
+    "route and carrier": {
+      "auc": 0.7527,
+      "log_loss": 0.4518,
+      "brier": 0.1431,
+      "ece": 0.009,
+      "mean_pred": 0.2277,
+      "base_rate": 0.2312
+    },
+    "aircraft type": {
+      "auc": 0.7525,
+      "log_loss": 0.4536,
+      "brier": 0.1439,
+      "ece": 0.0127,
+      "mean_pred": 0.2293,
+      "base_rate": 0.2312
+    }
+  },
+  "chain_effect": [
+    {
+      "band": "early",
+      "delay_rate": 0.1861,
+      "n": 93410
+    },
+    {
+      "band": "on time",
+      "delay_rate": 0.2139,
+      "n": 132856
+    },
+    {
+      "band": "5 to 15 late",
+      "delay_rate": 0.2506,
+      "n": 28181
+    },
+    {
+      "band": "15 to 30 late",
+      "delay_rate": 0.2752,
+      "n": 22062
+    },
+    {
+      "band": "30 to 60 late",
+      "delay_rate": 0.3151,
+      "n": 21314
+    },
+    {
+      "band": "60+ late",
+      "delay_rate": 0.3449,
+      "n": 25697
+    },
+    {
+      "band": "previous leg still on ground",
+      "delay_rate": 0.991,
+      "n": 446
+    },
+    {
+      "band": "no previous leg known",
+      "delay_rate": 0.359,
+      "n": 10298
+    }
+  ],
+  "rotation": {
+    "median_gap_hours": 24.4,
+    "share_previous_leg_same_day_under_12h": 0.2568,
+    "prev_departure_known_share": 0.9679
+  },
+  "quantiles": {
+    "0.5": {
+      "coverage_forest": 0.5167,
+      "coverage_slot": 0.5365,
+      "pinball_forest": 7.4922,
+      "pinball_slot": 8.0115,
+      "median_prediction_min": -2.0
+    },
+    "0.8": {
+      "coverage_forest": 0.8128,
+      "coverage_slot": 0.8213,
+      "pinball_forest": 8.315,
+      "pinball_slot": 9.588,
+      "median_prediction_min": 11.4
+    },
+    "0.9": {
+      "coverage_forest": 0.9108,
+      "coverage_slot": 0.916,
+      "pinball_forest": 6.8662,
+      "pinball_slot": 7.9392,
+      "median_prediction_min": 31.6
+    },
+    "p80_coverage_by_hour": {
+      "5": 0.7564,
+      "6": 0.8121,
+      "7": 0.7992,
+      "8": 0.8087,
+      "9": 0.7972,
+      "10": 0.8234,
+      "11": 0.813,
+      "12": 0.8205,
+      "13": 0.8338,
+      "14": 0.815,
+      "15": 0.8102,
+      "16": 0.8079,
+      "17": 0.8038,
+      "18": 0.811,
+      "19": 0.8149,
+      "20": 0.8107,
+      "21": 0.8358,
+      "22": 0.8561,
+      "23": 0.9014
+    },
+    "n_test_departed": 54145
+  },
+  "group_audit": [
+    {
+      "group": "origin=EWR",
+      "n": 19508,
+      "base_rate": 0.2696,
+      "mean_pred": 0.2627,
+      "auc": 0.7357,
+      "alert_rate": 0.2219,
+      "recall": 0.4592
+    },
+    {
+      "group": "origin=JFK",
+      "n": 17799,
+      "base_rate": 0.2035,
+      "mean_pred": 0.2001,
+      "auc": 0.7358,
+      "alert_rate": 0.1254,
+      "recall": 0.3429
+    },
+    {
+      "group": "origin=LGA",
+      "n": 17753,
+      "base_rate": 0.2168,
+      "mean_pred": 0.2151,
+      "auc": 0.7749,
+      "alert_rate": 0.171,
+      "recall": 0.4567
+    },
+    {
+      "group": "carrier=UA",
+      "n": 9671,
+      "base_rate": 0.2441,
+      "mean_pred": 0.2034,
+      "auc": 0.6944,
+      "alert_rate": 0.119,
+      "recall": 0.2757
+    },
+    {
+      "group": "carrier=B6",
+      "n": 9030,
+      "base_rate": 0.2309,
+      "mean_pred": 0.2346,
+      "auc": 0.7666,
+      "alert_rate": 0.1725,
+      "recall": 0.4355
+    },
+    {
+      "group": "carrier=EV",
+      "n": 8778,
+      "base_rate": 0.3321,
+      "mean_pred": 0.3597,
+      "auc": 0.756,
+      "alert_rate": 0.3685,
+      "recall": 0.6278
+    },
+    {
+      "group": "carrier=DL",
+      "n": 7942,
+      "base_rate": 0.1529,
+      "mean_pred": 0.1679,
+      "auc": 0.7109,
+      "alert_rate": 0.1097,
+      "recall": 0.304
+    },
+    {
+      "group": "carrier=AA",
+      "n": 5265,
+      "base_rate": 0.1749,
+      "mean_pred": 0.1797,
+      "auc": 0.7152,
+      "alert_rate": 0.1045,
+      "recall": 0.2932
+    },
+    {
+      "group": "carrier=MQ",
+      "n": 4195,
+      "base_rate": 0.2379,
+      "mean_pred": 0.2385,
+      "auc": 0.7887,
+      "alert_rate": 0.2005,
+      "recall": 0.517
+    },
+    {
+      "group": "carrier=US",
+      "n": 3212,
+      "base_rate": 0.1214,
+      "mean_pred": 0.1204,
+      "auc": 0.7475,
+      "alert_rate": 0.0644,
+      "recall": 0.3051
+    },
+    {
+      "group": "carrier=9E",
+      "n": 3119,
+      "base_rate": 0.2453,
+      "mean_pred": 0.2321,
+      "auc": 0.7362,
+      "alert_rate": 0.1715,
+      "recall": 0.417
+    }
+  ],
+  "streaming_check": {
+    "flights_checked": 2000,
+    "max_abs_difference": 0.0
+  },
+  "group_importance_logloss_increase": {
+    "aircraft's previous leg": 0.0299,
+    "airport congestion": 0.0518,
+    "weather at the airport": 0.0152,
+    "schedule slot": 0.0226,
+    "route and carrier": 0.0163,
+    "aircraft type": 0.003
+  },
+  "sample_explanations": [
+    {
+      "p": 0.9966,
+      "actual_delay_min": 85.0,
+      "reasons": [
+        {
+          "group": "aircraft's previous leg",
+          "effect": 2.5914,
+          "text": "the aircraft's previous flight is still on the ground, 93 min past its slot (raises the odds of a delay)"
+        },
+        {
+          "group": "route and carrier",
+          "effect": 1.296,
+          "text": "EV from EWR to CVG (raises the odds of a delay)"
+        },
+        {
+          "group": "airport congestion",
+          "effect": 0.8966,
+          "text": "recent departures are running 63 min off schedule, with 54 flights queued ahead (raises the odds of a delay)"
+        }
+      ]
+    },
+    {
+      "p": 0.5,
+      "actual_delay_min": -3.0,
+      "reasons": [
+        {
+          "group": "airport congestion",
+          "effect": 1.8606,
+          "text": "recent departures are running 22 min off schedule, with 52 flights queued ahead (raises the odds of a delay)"
+        },
+        {
+          "group": "aircraft type",
+          "effect": 0.2511,
+          "text": "this aircraft type (raises the odds of a delay)"
+        },
+        {
+          "group": "route and carrier",
+          "effect": -0.2311,
+          "text": "DL from LGA to DTW (lowers the odds of a delay)"
+        }
+      ]
+    },
+    {
+      "p": 0.0133,
+      "actual_delay_min": -4.0,
+      "reasons": [
+        {
+          "group": "schedule slot",
+          "effect": -1.7755,
+          "text": "a 6:00 slot with 21 departures within the hour (lowers the odds of a delay)"
+        },
+        {
+          "group": "route and carrier",
+          "effect": -1.0784,
+          "text": "US from LGA to DCA (lowers the odds of a delay)"
+        },
+        {
+          "group": "airport congestion",
+          "effect": -0.9505,
+          "text": "no recent departures, with 1 flight queued ahead (lowers the odds of a delay)"
+        }
+      ]
+    }
+  ],
+  "runtime_seconds": 213.2178
+}
