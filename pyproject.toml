@@ -7,7 +7,7 @@ name = "tailslip"
 version = "0.1.0"
 description = "Departure delay forecasts that follow each aircraft down its chain of flights"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [{ name = "Ranjith Guggilla", email = "ranjithguggilla668@gmail.com" }]
 dependencies = [

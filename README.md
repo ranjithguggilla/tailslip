@@ -228,7 +228,7 @@ pip install -r requirements.txt
 pip install -e . --no-deps
 ```
 
-Python 3.11 or newer. The pinned versions in `requirements.txt` are the ones the reported numbers came from (Python 3.13).
+Python 3.12 or newer. The pinned versions in `requirements.txt` are the ones the reported numbers came from (Python 3.13).
 
 ## Usage
 
